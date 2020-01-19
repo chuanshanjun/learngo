@@ -19,6 +19,9 @@ var (
 // 包内变量不能使用:= 赋值
 //bb := 4
 
+// 常量同样可以定义为包变量
+const filename = "abc.txt"
+
 func main() {
 	fmt.Println("Hello World")
 	variableZeroValue()
@@ -27,6 +30,12 @@ func main() {
 	variableShorter()
 	euler()
 	triangle()
+	consts()
+	fmt.Println(filename)
+	enums()
+	enums2()
+	enums3()
+	enums4()
 }
 
 func variableZeroValue() {
@@ -71,4 +80,67 @@ func calcTriangle(a, b int) int {
 	var c int
 	c = int(math.Sqrt(float64(a*a + b*b)))
 	return c
+}
+
+func consts() {
+	// 常量你可以不指定类型，他相当于一个文本替换
+	const filename = "abc.txt"
+	const a, b = 3, 4
+
+	// 同样常量也可以用 () 包裹
+	// go语言中的常量一般不大写
+	const (
+		filename2 = "ccc"
+		e, f      = 3, 5
+	)
+	var c int
+	// 此处常量自己转换成float
+	c = int(math.Sqrt(a*a + b*b))
+	fmt.Println(c, filename)
+}
+
+// go语言中没有枚举关键字一般用常量
+func enums() {
+	const (
+		cpp    = 0
+		java   = 1
+		python = 2
+		golang = 3
+	)
+	fmt.Println(cpp, java, python, golang)
+}
+
+// iota为自增可以从0开始自增
+func enums2() {
+	const (
+		cpp    = iota
+		java
+		python
+		golang
+	)
+	fmt.Println(cpp, java, python, golang)
+}
+
+func enums3() {
+	const (
+		cpp    = iota
+		_
+		python
+		golang
+		javascript
+	)
+	fmt.Println(cpp, javascript, python, golang)
+}
+
+// iota可以做为自增值的表达式的种子
+func enums4() {
+	const (
+		b    = 1 << (10 * iota)
+		kb
+		mb
+		gb
+		tb
+		pb
+	)
+	fmt.Println(b, kb, mb, gb, pb)
 }
