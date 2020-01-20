@@ -86,6 +86,19 @@ func sum(numbers ...int) int {
 	return s
 }
 
+func swap(a, b int) {
+	b, a = a, b
+}
+
+// 传入指针类型
+func swap2(a, b *int) {
+	*b, *a = *a, *b
+}
+
+func swap3(a, b int) (int, int) {
+	return b, a
+}
+
 func main() {
 	fmt.Println(eval(3, 4, "*"))
 	fmt.Println(div(4, 3))
@@ -114,4 +127,16 @@ func main() {
 		}, 3, 4))
 
 	fmt.Println(sum(1, 2, 3, 4, 5))
+
+	a, b := 3, 4
+	swap(a, b)
+	// 此时是值传递,原来的a,b值不变,无法交换
+	fmt.Println(a, b)
+
+	// 此时要传递指针类型，所以用&表示取地址值
+	swap2(&a, &b)
+	fmt.Println(a, b)
+
+	c, d := 3, 4
+	fmt.Println(swap3(c, d))
 }
