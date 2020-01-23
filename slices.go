@@ -62,6 +62,4 @@ func main() {
 	// go会开辟一个新的arr 然后将原来的arr拷贝过去
 	// 所以我们需要一个新的slice来接这个
 	fmt.Println("arr =", arr)
-
-
 }
