@@ -7,7 +7,7 @@ func printSlice(s []int) {
 		s, len(s), cap(s))
 }
 
-func main() {
+func sliceOps() {
 	fmt.Println("Creating slice")
 	var s []int //Zero value for slice is nil
 	// cap每次装不下后 原先容量*2
@@ -43,8 +43,8 @@ func main() {
 	printSlice(s2)
 
 	fmt.Println("Popping from back")
-	tail := s2[len(s2) - 1]
-	s2 = s2[:len(s2) - 1]
+	tail := s2[len(s2)-1]
+	s2 = s2[:len(s2)-1]
 
 	fmt.Println(tail)
 	printSlice(s2)

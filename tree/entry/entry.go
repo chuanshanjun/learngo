@@ -5,6 +5,28 @@ import (
 	"github.com/chuanshan/learngo/tree"
 )
 
+// 定义一个myTreeNode的结构体
+// 名字用小写，因为是自己用
+// 通过组合的方法来扩展Node
+type myTreeNode struct {
+	// 值的类型是指针，这样就不需要直接拷贝一份了
+	node *tree.Node
+}
+
+// 给结构体定义方法,也用小写的，因为也是自己用
+func (myNode *myTreeNode) postOrder() {
+	if myNode == nil || myNode.node == nil {
+		return
+	}
+
+	left := myTreeNode{myNode.node.Left}
+	right := myTreeNode{myNode.node.Right}
+
+	left.postOrder()
+	right.postOrder()
+	myNode.node.Print()
+}
+
 // 一个目录下是一个包
 func main() {
 
@@ -74,4 +96,9 @@ func main() {
 
 	// root是一个值，一样可以调用指针的方法
 	root.Traverse()
+
+	fmt.Println()
+	myRoot := myTreeNode{&root}
+	myRoot.postOrder()
+	fmt.Println()
 }
