@@ -31,4 +31,14 @@ func main() {
 	fmt.Println(q.Pop())
 	fmt.Println(q.IsEmpty())
 	testSpare()
+
+	// 将queue的接收类型改为 interface{}后
+	q.Push("abc")
+	fmt.Println(q.Pop())
+
+	q.Push2(3)
+	fmt.Println(q.Pop2())
+
+	q.Push3(3)
+	fmt.Println(q.Pop3())
 }
