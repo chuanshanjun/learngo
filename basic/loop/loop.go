@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func convertToBin(n int) string {
@@ -23,10 +25,20 @@ func printFile(filename string) {
 		panic(err)
 	}
 
-	scanner := bufio.NewScanner(file)
+	printFileContents(file)
 
-	// 没有开始条件 没有终止条件
-	// 相当与while
+	//scanner := bufio.NewScanner(file)
+	//
+	//// 没有开始条件 没有终止条件
+	//// 相当与while
+	//for scanner.Scan() {
+	//	fmt.Println(scanner.Text())
+	//}
+}
+
+func printFileContents(read io.Reader) {
+	scanner := bufio.NewScanner(read)
+
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
 	}
@@ -48,4 +60,15 @@ func main() {
 		convertToBin(23123),
 		convertToBin(0),
 	)
+
+	// ``是跨行字符串
+	s := `abc"d"
+	lllkkk
+	
+	123
+	k`
+
+	// 打印文件的地方用 read后 适用范围就更加广了
+	// btyes.NewReader()
+	printFileContents(strings.NewReader(s))
 }

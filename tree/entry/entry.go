@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/chuanshan/learngo/tree"
 )
 
@@ -97,8 +98,18 @@ func main() {
 	// root是一个值，一样可以调用指针的方法
 	root.Traverse()
 
+	fmt.Println("使用新的遍历的方法===>>>")
+
+	root.TraverseNew()
+
 	fmt.Println()
 	myRoot := myTreeNode{&root}
 	myRoot.postOrder()
 	fmt.Println()
+
+	nodeCounts := 0
+	root.TraverseFunc(func(node *tree.Node) {
+		nodeCounts++
+	})
+	fmt.Println("Node count:", nodeCounts)
 }
