@@ -54,5 +54,5 @@ func main() {
 	fmt.Println(lengthOfNonRepeatingSubStr("b"))
 	fmt.Println(lengthOfNonRepeatingSubStr("abcdef"))
 	// 中文 UTF-8 编码 占据3个字节
-	fmt.Println(lengthOfNonRepeatingSubStrByRune("我爱慕课网我爱网"))
+	fmt.Println(lengthOfNonRepeatingSubStrByRune(" "))
 }

@@ -30,3 +30,18 @@ func TestSubstr(t *testing.T) {
 		}
 	}
 }
+
+// 性能测试版本1
+func BenchmarkSubstr(b *testing.B) {
+	s := "黑化肥挥发发灰会花飞灰化肥挥发发黑会飞花"
+	ans := 8
+
+	for i := 0; i < b.N; i++ {
+		actual := lengthOfNonRepeatingSubStrByRune(s)
+		if actual != ans {
+			b.Errorf("got %d for input %s; "+
+				"expected %d",
+				actual, s, ans)
+		}
+	}
+}

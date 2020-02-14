@@ -73,6 +73,7 @@ type appHandler func(writer http.ResponseWriter, request *http.Request) error
 // errWrapper使用的是函数式编程 输入是一个函数 输出也是一个函数
 func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
+		// 处理panic
 		defer func() {
 			if r := recover(); r != nil {
 				log.Printf("Panic: %v", r)
@@ -88,7 +89,7 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 			//log.Warn("Error handling request: %s",
 			//	err.Error())
 
-			// 处理我们自定义的error
+			// 处理我们自定义的error userErr
 			if userErr, ok := err.(userError); ok {
 				http.Error(writer,
 					userErr.Message(),
@@ -99,6 +100,7 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 			// 标准库中的log没有warn这个级别的
 			log.Printf("Error handling request: %s",
 				err.Error())
+			// system error 出错不把系统信息给出，而是给出包装过的错误
 			code := http.StatusOK
 			switch {
 			case os.IsNotExist(err):
@@ -111,6 +113,7 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 			http.Error(writer,
 				http.StatusText(code), code)
 		}
+
 	}
 }
 
